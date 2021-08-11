@@ -1,6 +1,6 @@
-console.log("this is ES6classes version of the project")
 
-class Book{
+
+class Book {
     constructor(name, author, type) {
         this.name = name;
         this.author = author;
@@ -8,9 +8,9 @@ class Book{
     }
 }
 
-class Display{
+class Display {
     add(book) {
-        console.log("Adding to the UI")
+
         let tableBody = document.getElementById("tableBody");
         let uiString = ` <tr>
        
@@ -21,30 +21,30 @@ class Display{
         tableBody.innerHTML += uiString;
     }
 
-    clear () {
+    clear() {
         let libraryForm = document.getElementById("libraryForm");
         libraryForm.reset();
-    
+
     }
 
-    validate (book) {
+    validate(book) {
         if (book.name.length < 2 || book.author.length < 2) {
             return false
         }
         else {
             return true;
         }
-    
+
     }
 
-    show (type, displayMessage) {
+    show(type, displayMessage) {
         let message = document.getElementById("message")
         let boldTxt;
-        if(type==="success"){
-            boldTxt= "Success";
+        if (type === "success") {
+            boldTxt = "Success";
         }
-        else{
-            boldTxt= "Error";
+        else {
+            boldTxt = "Error";
         }
         message.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                                 <strong>${boldTxt}:</strong> ${displayMessage}
@@ -52,24 +52,24 @@ class Display{
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>`
-    
+
         // Set time out function clears the message notification after 2000milli secs or 2 secs.
         setTimeout(function () {
-    
+
             message.innerHTML = ''
         }, 2000);
-    
-        
+
+
     }
-    
-  
-    
+
+
+
 }
 let libraryForm = document.getElementById("libraryForm");
 libraryForm.addEventListener('submit', libraryFormSubmit);
 
 function libraryFormSubmit(e) {
-    console.log("You have submitted library form");
+
     let name = document.getElementById('bookName').value;
     let author = document.getElementById('author').value;
     let type; {
@@ -92,17 +92,17 @@ function libraryFormSubmit(e) {
     e.preventDefault();
     let book = new Book(name, author, type);
     console.log(book);
-    
+
     let display = new Display();
     if (display.validate(book)) {
         display.add(book);
         display.clear();
         display.show("success", "Your book has been successfully added.")
-        
+
     }
     else {
         // show error to the user.
         display.show("danger", "Sorry you cannot add this book.")
     }
-   
-    }
+
+}
